@@ -1,0 +1,49 @@
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .innerContainer {
+        display: column;
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    #currency {
+        display: column;
+    }
+</style>
+<script>
+    function haalop() {
+        fetch(
+            "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_eXVSSSN6XsQrTMF6oOam9JP7DgeqWHZpesbXt40p&base_currency=EUR&currencies=" +
+                valuta
+        )
+            .then((r) => r.json())
+            .then((d) => toondata(d));
+    }
+    function toondata(spel) {
+        document.getElementById("currency").innerHTML +=
+            "-" +
+            "<div>Japanese Yen:" +
+            spel.data.JPY +
+            "-" +
+            " <br /> united States Dollar:" +
+            spel.data.USD +
+            "</div>";
+    }
+
+    let valuta = "JPY,USD";
+</script>
+
+<div class="container">
+    <div class="innerContainer">
+        <input type="text" id="inputCurrency" /> <br />
+        <button onclick="haalop()">haal currency op</button>
+    </div>
+    <div id="currency"></div>
+</div>
